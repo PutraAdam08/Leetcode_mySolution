@@ -11,7 +11,7 @@ struct ListNode {
  
 class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    /*ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         if(l1 != nullptr && l2 != nullptr){
             int c = l1->val+l2->val;
             if(l1->next != nullptr)
@@ -36,6 +36,35 @@ public:
         }
 
         return nullptr;
+    }*/
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2){
+        int saved = 0;
+        ListNode *head = new ListNode(0);
+        ListNode *temp = head;
+        while(saved != 0 || (l1 != nullptr || l2 != nullptr)){
+            int n, m;
+            if(l1 != nullptr)
+                n = l1->val;
+            else
+                n = 0;
+            if(l2 != nullptr)
+                m = l2->val;
+            else
+                m = 0;
+            int o = n+m+saved;
+            saved = o/10;
+
+            ListNode* newNode = new ListNode(o%10);
+            temp->next = newNode;
+            temp = temp->next;
+
+            if(l1 != nullptr)
+                l1 = l1->next;
+            if(l2 != nullptr)
+                l2 = l2->next;
+        }
+
+        return head->next;
     }
 };
 
