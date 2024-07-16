@@ -3,33 +3,34 @@ using namespace std;
 
 class solution {
 public:
-    void longestPalindrome(string s) {
+    string longestPalindrome(string s) {
+        if(s.length() <= 1) return s;
         string res;
-        vector<int> str(256, -1);
         int max = 0;
 
         for(int i = s.length()-1; i >= 0; i--){
             int temp = 0;
             int a = 0;
             int b = i;
-            while(s[a] != s[b]) a++;
-            while(a != b && a<b && b>a){
-                if(a != b) {temp++; a++;}
-                if(b != a) {temp++; b--;}
+            while(s[a] != s[b] && a < s.length()) a++;
+            if(a == s.length()-1 || a == 0) continue;
+            cout << a << endl;
+            while(temp <= b-a){
+                res.push_back(s[temp+a]); temp++;
             }
-            cout <<temp<< endl;
+            return res;
             
-
         }
-        
+        return "";
     }
 };
 
 int main (){
     solution ss;
-    string s = "cbbd";
+    string s = "aacabdkacaa";
 
-    ss.longestPalindrome(s);
+    string res = ss.longestPalindrome(s);
+    cout << res;
 
     return 0;
 }
